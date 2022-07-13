@@ -8,7 +8,7 @@ import emotionTailwindPreflight from 'emotion-tailwind-preflight'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { AdobeClean } from 'assets/adobe-clean'
+import { AdobeClean } from 'styles/assets'
 import { Body } from 'styles/global'
 import { theme } from 'styles/theme'
 
@@ -18,7 +18,6 @@ function SandboxApp ({ Component, pageProps }: AppProps) {
       <Global styles={ emotionTailwindPreflight } />
       <AdobeClean />
       <Head>
-        <html className='spectrum spectrum--large spectrum--dark spectrum-Body spectrum-Body--sizeM' />
         <title>Sandbox</title>
         <meta content='initial-scale=1.0, width=device-width' name='viewport' />
         <meta content='IE=edge' httpEquiv='X-UA-Compatible' />
