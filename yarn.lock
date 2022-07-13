@@ -3078,6 +3078,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"common-tags@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "common-tags@npm:1.8.2"
+  checksum: 767a6255a84bbc47df49a60ab583053bb29a7d9687066a18500a516188a062c4e4cd52de341f22de0b07062e699b1b8fe3cfa1cb55b241cb9301aeb4f45b4dff
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -5566,6 +5573,7 @@ __metadata:
     babel-plugin-ramda: ^2.1.1
     bezier-easing: ^2.1.0
     chroma-js: ^2.4.2
+    common-tags: ^1.8.2
     concurrently: ^7.2.2
     emotion-tailwind-preflight: ^2.0.1
     eslint: ^8.19.0
