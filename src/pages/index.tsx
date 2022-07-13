@@ -7,7 +7,7 @@ const Home: NextPage = () => {
       <main>
         <h1
           css={ theme => css`
-            ${ theme.typeface.primary({ fontSize: 6, lineHeight: 8 }) }
+            ${ theme.typeface.primary({ fontSize: 16, lineHeight: 16 }) }
 
             text-align: center;
           ` }>
