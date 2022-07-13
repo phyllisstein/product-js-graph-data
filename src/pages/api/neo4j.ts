@@ -2,14 +2,29 @@ import { oneLine } from 'common-tags'
 import neo4j from 'neo4j-driver'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
+type Greeting = {
+  message: string
+  id: number
+}
+
+type CreateResponse = {
+  error: string
+} | {
+  greetings: Greeting[]
 }
 
 export default async function handler (
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
+  res: NextApiResponse<CreateResponse>,
 ) {
+  if (
+    !req.method ||
+    !['POST', 'GET'].includes(req.method)
+  ) {
+    res.status(405).send({ error: 'Method not allowed' })
+    return
+  }
+
   const driver = neo4j.driver('bolt://neo4j:7687')
   const session = driver.session()
 
@@ -18,15 +33,16 @@ export default async function handler (
       const result = await session.run(
         oneLine`CREATE (a:Greeting)
                     SET a.message = $message
-                    RETURN a.message + ", from node " + id(a)`,
+                    RETURN a`,
         { message: 'Hello, World' },
       )
 
-      const record = result.records[0]
-      const greeting = record.get(0)
+      const record = result.records[0].get(0)
+      const id = record.identity.low
+      const message = record.properties.message
 
-      res.status(201).send({ greeting, record })
-    } catch (error) {
+      res.status(201).send({ greetings: [{ id, message }] })
+    } catch (error: Error) {
       res.status(500).send({ error: error.message })
     } finally {
       await session.close()
@@ -34,24 +50,29 @@ export default async function handler (
   }
 
   if (req.method === 'GET') {
-    const result = await session.readTransaction(tx =>
-      tx.run('MATCH (a:Greeting) RETURN a'),
-    )
+    try {
+      const result = await session.readTransaction(tx =>
+        tx.run('MATCH (a:Greeting) RETURN a'),
+      )
 
-    const greetings = result.records.map(record => {
-      const concreteRecord = record.get(0)
-      const message = concreteRecord.properties.message
-      const id = concreteRecord.identity.low
-      return {
-        id,
-        message,
-      }
-    })
+      const greetings = result.records.map(record => {
+        const concreteRecord = record.get(0)
+        const message = concreteRecord.properties.message
+        const id = concreteRecord.identity.low
 
-    res.status(200).send({ greetings })
+        return {
+          id,
+          message,
+        }
+      })
+
+      res.status(200).send({ greetings })
+    } catch (error: Error) {
+      res.status(500).send({ error: error.message })
+    } finally {
+      await session.close()
+    }
   }
 
   await driver.close()
-
-  res.status(405).send({ error: 'Method not allowed' })
 }
