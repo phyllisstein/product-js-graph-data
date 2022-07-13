@@ -5,33 +5,13 @@
     "name": "server-restart",
     "expression": [
       "anyof",
-      [
-        "name",
-        "next.config.js",
-        "wholename"
-      ],
-      [
-        "name",
-        "tsconfig.json",
-        "wholename"
-      ],
-      [
-        "name",
-        "_app.tsx"
-      ],
-      [
-        "name",
-        "_document.tsx"
-      ],
-      [
-        "name",
-        "develop.sh"
-      ]
+      ["name", "next.config.js", "wholename"],
+      ["name", "tsconfig.json", "wholename"],
+      ["name", "_app.tsx"],
+      ["name", "_document.tsx"],
+      ["name", "develop.sh"]
     ],
-    "command": [
-      "./bin/develop.sh",
-      "serve"
-    ],
+    "command": ["./config/develop.sh", "serve"],
     "append_files": false
   }
 ]

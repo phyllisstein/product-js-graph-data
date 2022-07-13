@@ -5,15 +5,16 @@ services:
     build:
       context: .
     init: true
+    command: watch
     environment:
-      - VIRTUAL_HOST=sandbox.duet.here
+      - VIRTUAL_HOST=graph-js.vox.here
     expose:
-      - '80'
+      - '3000'
     networks:
       - default
       - nginx-proxy
     extra_hosts:
-      - 'sandbox.duet.here:127.0.0.1'
+      - 'graph-js.vox.here:127.0.0.1'
     volumes:
       - type: bind
         source: .
@@ -28,8 +29,24 @@ services:
         target: /var/cache/yarn
     secrets:
       - environment
+  neo4j:
+    image: neo4j/neo4j-arm64-experimental:4.3.14-arm64
+    environment:
+      - NEO4J_AUTH=none
+      - NEO4J_dbms_default__listen__address=0.0.0.0
+      - NEO4JLABS_PLUGINS='["apoc"]'
+    volumes:
+      - type: volume
+        source: neo4j_data
+        target: /data
+    expose:
+      - '7474'
+    ports:
+      - '7474:7474'
+      - '7687:7687'
 
 volumes:
+  neo4j_data:
   node_modules:
   yarn_cache:
 

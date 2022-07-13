@@ -82,19 +82,29 @@ const getPlumber = ({
     const shift = baselineDifference < 0 ? 0 : 1
 
     const gridFontSize = scaledFontSize * gridHeightValue
-    const marginTop = (leadingTop - shift) * gridHeightValue
-    const paddingTop = (shift - baselineDifference) * gridHeightValue
-    const paddingBottom = (1 - shift + baselineDifference) * gridHeightValue
-    const marginBottom = (leadingBottom + shift - 1) * gridHeightValue
+    const marginTop = `${
+      round(leadingTop - shift) * gridHeightValue
+    }${ gridHeightUnit }`
+    const paddingTop = `${
+      round(shift - baselineDifference) * gridHeightValue
+    }${ gridHeightUnit }`
+    const paddingBottom = `${
+      round(1 - shift + baselineDifference) * gridHeightValue
+    }${ gridHeightUnit }`
+    const marginBottom = `${
+      round(leadingBottom + shift - 1) * gridHeightValue
+    }${ gridHeightUnit }`
+    const fontSizeWithUnit = `${ round(gridFontSize) }${ gridHeightUnit }`
+    const lineHeightWithUnit = `${ round(lineHeight) }${ gridHeightUnit }`
 
     return css`
-      margin-top: ${ round(marginTop) }${ gridHeightUnit };
-      margin-bottom: ${ round(marginBottom) }${ gridHeightUnit };
-      padding-top: ${ round(paddingTop) }${ gridHeightUnit };
-      padding-bottom: ${ round(paddingBottom) }${ gridHeightUnit };
+      margin-top: ${ marginTop };
+      margin-bottom: ${ marginBottom };
+      padding-top: ${ paddingTop };
+      padding-bottom: ${ paddingBottom };
 
-      font-size: ${ round(gridFontSize) }${ gridHeightUnit };
-      line-height: ${ round(lineHeight) }${ gridHeightUnit };
+      font-size: ${ fontSizeWithUnit };
+      line-height: ${ lineHeightWithUnit };
     `
   }
 

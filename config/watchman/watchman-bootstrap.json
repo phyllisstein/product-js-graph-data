@@ -3,14 +3,8 @@
   "/app",
   {
     "name": "watchman-bootstrap",
-    "expression": [
-      "dirname",
-      "config/watchman"
-    ],
-    "command": [
-      "./bin/develop.sh",
-      "watchman"
-    ],
+    "expression": ["dirname", "config/watchman"],
+    "command": ["./config/develop.sh", "watchman"],
     "append_files": false
   }
 ]

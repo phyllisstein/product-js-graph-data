@@ -3,15 +3,8 @@
   "/app",
   {
     "name": "yarn-install",
-    "expression": [
-      "name",
-      "package.json",
-      "wholename"
-    ],
-    "command": [
-      "./bin/develop.sh",
-      "yarn"
-    ],
+    "expression": ["name", "package.json", "wholename"],
+    "command": ["./config/develop.sh", "yarn"],
     "append_files": false
   }
 ]

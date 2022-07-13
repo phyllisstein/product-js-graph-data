@@ -16,7 +16,6 @@ export const between = (
   end: Breakpoint,
   style: SerializedStyles,
 ) =>
-  // prettier-ignore
   css`
     @media (min-width: ${ breakpoints[start] }) and (max-width: ${ breakpoints[end] }) {
       ${ style }

@@ -1,8 +1,6 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": [
-    "source.fixAll.format",
     "source.fixAll.stylelint",
     "source.fixAll.eslint"
   ],
@@ -10,15 +8,11 @@
   "eslint.lintTask.enable": true,
   "stylelint.enable": true,
   "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
     "typescript",
     "typescriptreact"
   ],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
-  },
-  "prettier.enable": true
+  }
 }

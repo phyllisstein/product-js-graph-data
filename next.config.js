@@ -4,11 +4,6 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    concurrentFeatures: true,
-    concurrentMode: true,
-    serverComponents: true,
-  },
   compiler: {
     emotion: true,
   },

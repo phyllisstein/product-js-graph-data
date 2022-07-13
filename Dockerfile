@@ -35,7 +35,7 @@ RUN cd /tmp/watchman-${WATCHMAN_VERSION} \
 RUN strip /usr/local/bin/watchman
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ App ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-FROM node:17-alpine AS app
+FROM node:18-alpine AS app
 
 COPY --from=watchman /usr/local/bin/watchman* /usr/local/bin/
 COPY --from=watchman /usr/local/var/run/watchman /usr/local/var/run/watchman
@@ -46,9 +46,9 @@ ENV YARN_CACHE_FOLDER=/var/cache/yarn \
   PATH="/app/node_modules/.bin:$PATH"
 WORKDIR /app
 
-COPY bin ./bin
+COPY config/develop.sh ./config/develop.sh
 COPY config/watchman ./config/watchman
 
-RUN ./bin/develop.sh watchman
+RUN ./config/develop.sh watchman
 
-CMD ["./config/develop.sh", "watch"]
+CMD ["./config/develop.sh"]
