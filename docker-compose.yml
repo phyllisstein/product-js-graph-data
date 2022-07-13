@@ -5,7 +5,6 @@ services:
     build:
       context: .
     init: true
-    command: watch
     environment:
       - VIRTUAL_HOST=graph-js.vox.here
     expose:
@@ -30,11 +29,13 @@ services:
     secrets:
       - environment
   neo4j:
-    image: neo4j/neo4j-arm64-experimental:4.3.14-arm64
+    image: neo4j/neo4j-arm64-experimental:4.4.0
     environment:
-      - NEO4J_AUTH=none
-      - NEO4J_dbms_default__listen__address=0.0.0.0
-      - NEO4JLABS_PLUGINS='["apoc"]'
+      - "NEO4J_AUTH=none"
+      - "NEO4J_dbms_default__listen__address=0.0.0.0"
+      - "NEO4J_dbms_directories_plugins=labs"
+      - "NEO4J_dbms_security_procedures_unrestricted=apoc.*"
+      - "NEO4JLABS_PLUGINS='[\"apoc\"]'"
     volumes:
       - type: volume
         source: neo4j_data

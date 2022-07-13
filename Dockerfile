@@ -51,4 +51,4 @@ COPY config/watchman ./config/watchman
 
 RUN ./config/develop.sh watchman
 
-CMD ["./config/develop.sh"]
+CMD ["./config/develop.sh", "watch"]
